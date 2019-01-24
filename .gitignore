@@ -6,6 +6,7 @@ __pycache__/
 *$py.class
 /.idea
 static/*.png
+config.py
 # C extensions
 *.so
 
