@@ -289,16 +289,8 @@
         jQuery.timeago.settings.allowFuture = true
         var total_players = 4018
         var leaderboard = null
-        var users = {
-        {
-            users | tojson
-        }
-        }
-        var names = {
-        {
-            names | tojson
-        }
-        }
+        var users = {{ users | tojson }}
+        var names = {{ names | tojson }}
         var game_feed_next = {}
         var game_feed_last_game = {}
         var live_leaderboard_last_load = {}
@@ -311,21 +303,11 @@
             live_leaderboard_loading[user] = false
             live_leaderboard_last_data[user] = null
         }
-        var game_feed_interval = {
-        {
-            game_feed_interval
-        }
-        }
-        var leaderboard_interval = {
-        {
-            leaderboard_interval
-        }
-        }
-        var finals_interval = {
-        {
-            finals_interval
-        }
-        }
+        var game_feed_interval = {{ game_feed_interval }}
+
+        var leaderboard_interval = {{ leaderboard_interval }}
+
+        var finals_interval = {{ finals_interval }}
 
         $(document).ready(function () {
             requestLeaderboard()
