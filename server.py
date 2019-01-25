@@ -18,7 +18,7 @@ user_api = base_api.format("user/{}")
 bot_api = base_api.format("user/{}/bot")
 finals_api = base_api.format("finals")
 
-TIMEOUT = 5
+TIMEOUT = 3
 
 
 @app.route('/', methods=['GET'])

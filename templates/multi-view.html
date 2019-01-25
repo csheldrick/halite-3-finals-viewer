@@ -311,7 +311,6 @@
 
         $(document).ready(function () {
             updateFinals()
-            setInterval(updateFinals, finals_interval)
             requestLeaderboard()
         })
 
@@ -324,8 +323,8 @@
                     leaderboard = data.leaderboard
                     total_players = leaderboard.length
                     updateRanks()
-                    setInterval(updateLiveLeaderboard, leaderboard_interval)
-                    setInterval(updateLiveGameFeed, game_feed_interval)
+                    updateLiveLeaderboard()
+                    updateLiveGameFeed()
                 }
             })
         }
@@ -418,6 +417,7 @@
             for (var user of users) {
                 refreshLiveGameFeed(user)
             }
+            setTimeout(updateLiveGameFeed, game_feed_interval)
         }
 
         function refreshLiveGameFeed(user) {
@@ -565,6 +565,7 @@
 
                 $("time.timeago").timeago()
             }
+            setTimeout(updateLiveLeaderboard, leaderboard_interval)
         }
 
         function refreshLiveLeaderboard(user) {
@@ -623,7 +624,7 @@
 
         // Finals
         function updateFinals() {
-            refreshFinals()
+            setTimeout(refreshFinals, finals_interval)
         }
 
         function refreshFinals() {
