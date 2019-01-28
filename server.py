@@ -8,7 +8,7 @@ def root_dir():
     return os.path.abspath(os.path.dirname(__file__))
 
 
-app = Flask(__name__, static_folder='./')
+app = Flask(__name__)
 
 base_api = "https://api.2018.halite.io/v1/api/{}"
 match_api = base_api.format("user/{}/match?order_by=desc,time_played&offset=0&limit=10")
@@ -118,14 +118,20 @@ def finals():
 
 @app.route("/<file>", methods=['GET'])
 def get_file(file):
-    filepath = root_dir() + f"\\static\\{file}"
-    if not os.path.isfile(filepath):
-        url = f"https://github.com/{file}"
-        resp = requests.get(url)
-        if resp.status_code == 200:
-            f = open(filepath, 'wb')
-            f.write(resp.content)
-            f.close()
+    image_extensions = [".png", ".jpg", ".jpeg", ".ico"]
+    if any(file.endswith(ext) for ext in image_extensions):
+        filepath = root_dir() + f"\\static\\img\\{file}"
+        if not os.path.isfile(filepath):
+            url = f"https://github.com/{file}"
+            resp = requests.get(url)
+            if resp.status_code == 200:
+                f = open(filepath, 'wb')
+                f.write(resp.content)
+                f.close()
+    elif file.endswith(".css"):
+        filepath = root_dir() + f"\\static\\css\\{file}"
+    elif file.endswith(".js"):
+        filepath = root_dir() + f"\\static\\js\\{file}"
     try:
         data = open(filepath, 'rb').read()
     except:
